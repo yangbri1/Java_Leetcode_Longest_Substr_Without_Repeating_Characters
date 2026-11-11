@@ -13,25 +13,29 @@ class Solution {
             /* 1. control flow handle duplicate 'char' */
             // Aside: Interesting --- so instead we are checking if the 'substringSet' already has the 'char' ...
             while(substringSet.contains(currentChar)){
-                /* 2. add 'currentChar' to 'Set' */
                 // Aside: ... if so then we remove it ...
                 substringSet.remove(s.charAt(left));
                 // increment 'left' by 1
                 ++left;
-                // checks if 'substringSet' atm DN have 'currentChar' ...
-                // if(!substringSet.contains(currentChar)){
-                //     /* 2. add 'currentChar' to 'Set' */
-                //     substringSet.add(currentChar);
-                // }
-
-                /* 3. instead of previously where we broke it down & shift both sides --- we could calculate the current window length together */
-                int currentLength = right - left + 1;
-
-                /* 4. update 'longestSubstrCount */
-                // Aside: 'longestSubstrCount' should be the **max length found** --- rather than number of iterations
-                // ++longestSubstrCount;
-                longestSubstrCount = Math.max(longestSubstrCount, currentLength);
             }
+
+            // // checks if 'substringSet' atm DN have 'currentChar' ...
+            // if(!substringSet.contains(currentChar)){
+            //     /* 2. add 'currentChar' to 'Set' */
+            //     substringSet.add(currentChar);
+            // }
+
+            // otw above could be simplied as so
+            substringSet.add(currentChar);
+
+            /* 3. instead of previously where we broke it down & shift both sides --- we could calculate the current window length together */
+            int currentLength = right - left + 1;
+
+            /* 4. update 'longestSubstrCount */
+            // Aside: 'longestSubstrCount' should be the **max length found** --- rather than number of iterations
+            // ++longestSubstrCount;
+            longestSubstrCount = Math.max(longestSubstrCount, currentLength);
+            
 
             /* ------- Revision Needed -------- */
             // // if the selected 'char' is NOT within 'Set' ... append 'char' to the 'Set' & ..
