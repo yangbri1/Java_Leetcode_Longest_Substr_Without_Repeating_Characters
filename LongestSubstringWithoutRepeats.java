@@ -11,19 +11,26 @@ class Solution {
             char currentChar = s.charAt(right);
 
             /* 1. control flow handle duplicate 'char' */
-            int i = 0;
-            while(i < substringSet.size()){
+            // Aside: Interesting --- so instead we are checking if the 'substringSet' already has the 'char' ...
+            while(substringSet.contains(currentChar)){
+                /* 2. add 'currentChar' to 'Set' */
+                // Aside: ... if so then we remove it ...
+                substringSet.remove(s.charAt(left));
+                // increment 'left' by 1
+                ++left;
                 // checks if 'substringSet' atm DN have 'currentChar' ...
-                if(!substringSet.contains(currentChar)){
-                    /* 2. add 'currentChar' to 'Set' */
-                    substringSet.add(currentChar);
-                }
+                // if(!substringSet.contains(currentChar)){
+                //     /* 2. add 'currentChar' to 'Set' */
+                //     substringSet.add(currentChar);
+                // }
 
                 /* 3. instead of previously where we broke it down & shift both sides --- we could calculate the current window length together */
                 int currentLength = right - left + 1;
 
                 /* 4. update 'longestSubstrCount */
-                ++longestSubstrCount;
+                // Aside: 'longestSubstrCount' should be the **max length found** --- rather than number of iterations
+                // ++longestSubstrCount;
+                longestSubstrCount = Math.max(longestSubstrCount, currentLength);
             }
 
             /* ------- Revision Needed -------- */
